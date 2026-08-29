@@ -7,7 +7,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <link rel="stylesheet" href="style.css?v=5.0">
+    <link rel="stylesheet" href="style.css?v=9.0">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -84,6 +84,13 @@
                     <i class="fa-solid fa-circle-check check-icon" id="check-t7"></i>
                 </button>
             </nav>
+
+            <div class="notice-card">
+                <div class="notice-header"><i class="fa-solid fa-shield-halved"></i> 저작권 및 수강 안내</div>
+                <p>본 교안은 <strong>캔바디지털콘텐츠강사 2급 과정</strong> 전용 수강 자료입니다.</p>
+                <p class="notice-alert"><i class="fa-solid fa-ban"></i> 무단 복제·재배포·공유 엄금</p>
+                <p class="notice-sub">* 본 교육과정 종료 시 비공개 전환 처리됩니다.</p>
+            </div>
 
             <div class="sidebar-footer">
                 <button id="open-admin-modal-btn" class="admin-mode-btn"><i class="fa-solid fa-key"></i> 관리자 모드 진입</button>
@@ -775,8 +782,8 @@
                 <p class="panel-subtitle">수강생에게 공개할 튜토리얼을 켜거나(ON) 끌(OFF) 수 있습니다.</p>
                 
                 <div class="quick-bulk-actions">
-                    <button type="button" id="bulk-open-all-btn" class="bulk-btn bulk-open"><i class="fa-solid fa-lock-open"></i> 전체 공개</button>
-                    <button type="button" id="bulk-lock-all-btn" class="bulk-btn bulk-lock"><i class="fa-solid fa-lock"></i> 1단계만 공개 (나머지 비공개)</button>
+                    <button type="button" id="bulk-open-all-btn" class="bulk-btn bulk-open"><i class="fa-solid fa-lock-open"></i> 전체 공개 (01~07 ON)</button>
+                    <button type="button" id="bulk-lock-all-btn" class="bulk-btn bulk-lock"><i class="fa-solid fa-lock"></i> 1단계만 공개 (2~7단계 잠금)</button>
                 </div>
 
                 <div class="toggle-list-container">
@@ -820,6 +827,6 @@
     <!-- Toast Notification -->
     <div id="toast" class="toast">클립보드에 복사되었습니다!</div>
 
-    <script src="script.js?v=6.0"></script>
+    <script src="script.js?v=7.0"></script>
 </body>
 </html>

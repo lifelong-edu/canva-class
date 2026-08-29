@@ -51,30 +51,76 @@ body.light-mode {
 }
 
 body.light-mode .instruction-list li {
-    color: #374151;
+    color: #1f2937;
+}
+
+body.light-mode .instruction-list code {
+    background: #e0e7ff;
+    color: #4338ca;
+    font-weight: 700;
+}
+
+body.light-mode .copy-box {
+    background: #f3f4f6;
+    border: 1px solid #d1d5db;
+}
+
+body.light-mode .copy-box code {
+    background: #e0e7ff;
+    color: #3730a3;
+    font-weight: 700;
 }
 
 body.light-mode .prompt-code-block {
     background: #f3f4f6;
-    border-color: rgba(0, 0, 0, 0.1);
+    border-color: #d1d5db;
 }
 
 body.light-mode .prompt-text {
-    color: #4f46e5;
+    color: #3730a3;
+    font-weight: 700;
 }
 
 body.light-mode .copy-btn {
     background: #ffffff;
+    border-color: #9ca3af;
+    color: #1f2937;
+}
+
+body.light-mode .checklist-group label {
+    background: #ffffff;
     border-color: #d1d5db;
-    color: #374151;
+    color: #111827;
+    font-weight: 600;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+body.light-mode .font-tag {
+    background: #ffedd5;
+    border-color: #fdba74;
+    color: #c2410c;
+    font-weight: 700;
+}
+
+body.light-mode .tip-box {
+    background: #ecfdf5;
+    border-color: #a7f3d0;
+    color: #065f46;
 }
 
 body.light-mode .recipe-item,
 body.light-mode .method-card,
-body.light-mode .m-step,
-body.light-mode .checklist-group label {
-    background: #f9fafb;
-    border-color: rgba(0, 0, 0, 0.08);
+body.light-mode .m-step {
+    background: #ffffff;
+    border-color: #e5e7eb;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+
+body.light-mode .recipe-item p,
+body.light-mode .m-text p,
+body.light-mode .intro-info p,
+body.light-mode .step-header h4 {
+    color: #1f2937;
 }
 
 body.light-mode .method-card h5,
@@ -364,6 +410,64 @@ body.light-mode .nav-btn.locked .open-date-badge {
     background: #fee2e2;
     border: 1px solid #fca5a5;
     font-weight: 800;
+}
+
+/* Notice Card */
+.notice-card {
+    margin-top: auto;
+    margin-bottom: 16px;
+    padding: 14px 16px;
+    background: rgba(239, 68, 68, 0.08);
+    border: 1px solid rgba(239, 68, 68, 0.25);
+    border-radius: var(--radius-md);
+    font-size: 0.78rem;
+    color: #e5e7eb;
+}
+
+.notice-header {
+    font-weight: 800;
+    color: #f87171;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+}
+
+.notice-card p {
+    line-height: 1.45;
+    margin-bottom: 4px;
+}
+
+.notice-alert {
+    color: #ef4444;
+    font-weight: 800;
+    margin-top: 4px;
+}
+
+.notice-sub {
+    color: var(--text-muted);
+    font-size: 0.72rem;
+    margin-top: 6px;
+}
+
+/* Light Mode Override for Notice Card */
+body.light-mode .notice-card {
+    background: #fef2f2;
+    border-color: #fca5a5;
+    color: #1f2937;
+}
+
+body.light-mode .notice-header {
+    color: #dc2626;
+}
+
+body.light-mode .notice-alert {
+    color: #b91c1c;
+}
+
+body.light-mode .notice-sub {
+    color: #6b7280;
 }
 
 .sidebar-footer {

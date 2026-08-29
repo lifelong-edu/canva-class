@@ -35,7 +35,21 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- State Storage Keys ---
     const STORAGE_KEY = 'canva_tutorial_progress_v1';
     const THEME_KEY = 'canva_theme_mode';
+    const OPEN_STATES_KEY = 'canva_open_states_v1';
+
+    // Clear legacy localStorage admin auth key if present to enforce password entry
+    localStorage.removeItem('canva_admin_authenticated');
+
     let userProgress = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+    let tutorialOpenStates = JSON.parse(localStorage.getItem(OPEN_STATES_KEY)) || {
+        'tutorial-1': true,
+        'tutorial-2': false,
+        'tutorial-3': false,
+        'tutorial-4': false,
+        'tutorial-5': false,
+        'tutorial-6': false,
+        'tutorial-7': false
+    };
 
     // --- Initialize ---
     initApp();
@@ -215,6 +229,77 @@ document.addEventListener('DOMContentLoaded', () => {
                 checkTutorialCompletion(activeTutorialId);
             });
         });
+
+        // ON/OFF toggle switches change
+        document.querySelectorAll('.tutorial-onoff-switch').forEach(sw => {
+            sw.addEventListener('change', (e) => {
+                const tutId = e.target.getAttribute('data-tut-id');
+                tutorialOpenStates[tutId] = e.target.checked;
+                saveOpenStates();
+
+                // Apply locking status to sidebar buttons
+                navButtons.forEach(btn => {
+                    if (btn.getAttribute('data-target') === tutId) {
+                        const badgeEl = btn.querySelector('.open-date-badge');
+                        if (e.target.checked) {
+                            btn.classList.remove('locked');
+                            if (badgeEl) {
+                                badgeEl.textContent = '공개중';
+                                badgeEl.style.color = 'var(--canva-cyan)';
+                                badgeEl.style.background = 'rgba(0, 196, 204, 0.12)';
+                                badgeEl.style.borderColor = 'rgba(0, 196, 204, 0.25)';
+                            }
+                        } else {
+                            btn.classList.add('locked');
+                            if (badgeEl) {
+                                badgeEl.textContent = '🔒 비공개';
+                                badgeEl.style.color = '#ef4444';
+                                badgeEl.style.background = 'rgba(239, 68, 68, 0.12)';
+                                badgeEl.style.borderColor = 'rgba(239, 68, 68, 0.3)';
+                            }
+                        }
+                    }
+                });
+
+                if (e.target.checked) {
+                    // Close admin modal and immediately display the unlocked tutorial
+                    if (adminModal) adminModal.classList.remove('active');
+                    switchTutorial(tutId);
+                    showToast(`🔓 튜토리얼 0${tutId.replace('tutorial-', '')}번이 공개되었습니다!`);
+                } else {
+                    showToast(`🔒 튜토리얼 0${tutId.replace('tutorial-', '')}번이 비공개되었습니다.`);
+                }
+            });
+        });
+
+        // Bulk Open All Button
+        const bulkOpenAllBtn = document.getElementById('bulk-open-all-btn');
+        if (bulkOpenAllBtn) {
+            bulkOpenAllBtn.addEventListener('click', () => {
+                for (let i = 1; i <= 7; i++) {
+                    tutorialOpenStates[`tutorial-${i}`] = true;
+                }
+                saveOpenStates();
+                applyOpenStates();
+                if (adminModal) adminModal.classList.remove('active');
+                showToast('🔓 모든 튜토리얼이 전체 공개되었습니다!');
+            });
+        }
+
+        // Bulk Lock All Button (Keep 01 open)
+        const bulkLockAllBtn = document.getElementById('bulk-lock-all-btn');
+        if (bulkLockAllBtn) {
+            bulkLockAllBtn.addEventListener('click', () => {
+                tutorialOpenStates['tutorial-1'] = true;
+                for (let i = 2; i <= 7; i++) {
+                    tutorialOpenStates[`tutorial-${i}`] = false;
+                }
+                saveOpenStates();
+                applyOpenStates();
+                if (adminModal) adminModal.classList.remove('active');
+                showToast('🔒 1단계만 공개되고 2~7단계는 비공개 처리되었습니다.');
+            });
+        }
 
         // Toggle all check for current active tutorial
         toggleAllCheckBtn.addEventListener('click', () => {

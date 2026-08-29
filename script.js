@@ -148,17 +148,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const adminPasswordInput = document.getElementById('admin-password-input');
 
         const ADMIN_PASSCODE = '106406';
-        let isAuthenticatedAdmin = localStorage.getItem('canva_admin_authenticated') === 'true';
+        // Temporary session memory (requires password again on fresh page load)
+        let isAuthenticatedAdmin = sessionStorage.getItem('canva_admin_authenticated') === 'true';
 
         if (openAdminModalBtn) {
             openAdminModalBtn.addEventListener('click', () => {
                 if (isAuthenticatedAdmin) {
-                    // Directly open control panel
+                    // Already authenticated in current session: Open control panel directly
                     adminAuthView.style.display = 'none';
                     adminControlView.style.display = 'block';
                     adminModal.classList.add('active');
                 } else {
-                    // Open password prompt
+                    // Always show password input dialog first
                     adminAuthView.style.display = 'block';
                     adminControlView.style.display = 'none';
                     adminPasswordInput.value = '';
@@ -191,7 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (inputVal === ADMIN_PASSCODE) {
                     isAuthenticatedAdmin = true;
-                    localStorage.setItem('canva_admin_authenticated', 'true');
+                    sessionStorage.setItem('canva_admin_authenticated', 'true');
                     adminAuthView.style.display = 'none';
                     adminControlView.style.display = 'block';
                     showToast('🔓 [관리자 인증 성공] 튜토리얼 제어판이 열렸습니다!');

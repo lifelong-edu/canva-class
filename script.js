@@ -196,7 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     adminControlView.style.display = 'block';
                     showToast('🔓 [관리자 인증 성공] 튜토리얼 제어판이 열렸습니다!');
                 } else {
-                    alert('비밀번호가 올바르지 않습니다 (힌트: 106406).');
+                    alert('비밀번호가 올바르지 않습니다. 다시 확인해 주세요.');
                     adminPasswordInput.value = '';
                     adminPasswordInput.focus();
                 }

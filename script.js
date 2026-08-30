@@ -104,17 +104,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 btn.classList.add('locked');
                 if (badgeEl) {
                     badgeEl.textContent = '🔒 비공개';
-                    badgeEl.style.color = '#ef4444';
-                    badgeEl.style.background = 'rgba(239, 68, 68, 0.12)';
-                    badgeEl.style.borderColor = 'rgba(239, 68, 68, 0.3)';
+                    badgeEl.removeAttribute('style');
                 }
             } else {
                 btn.classList.remove('locked');
                 if (badgeEl) {
                     badgeEl.textContent = '공개중';
-                    badgeEl.style.color = 'var(--canva-cyan)';
-                    badgeEl.style.background = 'rgba(0, 196, 204, 0.12)';
-                    badgeEl.style.borderColor = 'rgba(0, 196, 204, 0.25)';
+                    badgeEl.removeAttribute('style');
                 }
             }
         });
@@ -248,17 +244,13 @@ document.addEventListener('DOMContentLoaded', () => {
                             btn.classList.remove('locked');
                             if (badgeEl) {
                                 badgeEl.textContent = '공개중';
-                                badgeEl.style.color = 'var(--canva-cyan)';
-                                badgeEl.style.background = 'rgba(0, 196, 204, 0.12)';
-                                badgeEl.style.borderColor = 'rgba(0, 196, 204, 0.25)';
+                                badgeEl.removeAttribute('style');
                             }
                         } else {
                             btn.classList.add('locked');
                             if (badgeEl) {
                                 badgeEl.textContent = '🔒 비공개';
-                                badgeEl.style.color = '#ef4444';
-                                badgeEl.style.background = 'rgba(239, 68, 68, 0.12)';
-                                badgeEl.style.borderColor = 'rgba(239, 68, 68, 0.3)';
+                                badgeEl.removeAttribute('style');
                             }
                         }
                     }

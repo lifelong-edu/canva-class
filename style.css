@@ -1233,6 +1233,19 @@ body.light-mode #admin-password-input {
         width: 100%;
         height: auto;
         position: relative;
+        padding: 16px;
+    }
+
+    .nav-menu {
+        flex-direction: row;
+        overflow-x: auto;
+        padding-bottom: 8px;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .nav-btn {
+        flex-shrink: 0;
+        min-width: 220px;
     }
 
     .main-content {

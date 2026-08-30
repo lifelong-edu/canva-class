@@ -40,8 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Clear legacy localStorage admin auth key if present to enforce password entry
     localStorage.removeItem('canva_admin_authenticated');
 
-    let userProgress = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
-    let tutorialOpenStates = JSON.parse(localStorage.getItem(OPEN_STATES_KEY)) || {
+    const DEFAULT_OPEN_STATES = {
         'tutorial-1': true,
         'tutorial-2': false,
         'tutorial-3': false,
@@ -50,6 +49,10 @@ document.addEventListener('DOMContentLoaded', () => {
         'tutorial-6': false,
         'tutorial-7': false
     };
+
+    let userProgress = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+    let savedOpenStates = JSON.parse(localStorage.getItem(OPEN_STATES_KEY)) || {};
+    let tutorialOpenStates = Object.assign({}, DEFAULT_OPEN_STATES, savedOpenStates);
 
     // --- Initialize ---
     initApp();
@@ -262,7 +265,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
 
                 if (e.target.checked) {
-                    // Close admin modal and immediately display the unlocked tutorial
                     if (adminModal) adminModal.classList.remove('active');
                     switchTutorial(tutId);
                     showToast(`🔓 튜토리얼 0${tutId.replace('tutorial-', '')}번이 공개되었습니다!`);

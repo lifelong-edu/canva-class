@@ -66,7 +66,9 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('Failed to load savedOpenStates from localStorage:', e);
     }
 
-    let tutorialOpenStates = Object.assign({}, DEFAULT_OPEN_STATES, savedOpenStates);
+    // Global configuration priority: window.CANVA_CONFIG -> savedOpenStates -> DEFAULT_OPEN_STATES
+    const globalConfigStates = (window.CANVA_CONFIG && window.CANVA_CONFIG.openStates) || {};
+    let tutorialOpenStates = Object.assign({}, DEFAULT_OPEN_STATES, globalConfigStates, savedOpenStates);
 
     // --- Initialize ---
     initApp();
@@ -178,7 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const adminAuthForm = document.getElementById('admin-auth-form');
         const adminPasswordInput = document.getElementById('admin-password-input');
 
-        const ADMIN_PASSCODE = '106406';
+        const ADMIN_PASSCODE = (window.CANVA_CONFIG && window.CANVA_CONFIG.adminPasscode) || '106406';
         // Temporary session memory (requires password again on fresh page load)
         let isAuthenticatedAdmin = sessionStorage.getItem('canva_admin_authenticated') === 'true';
 

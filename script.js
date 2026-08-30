@@ -50,8 +50,22 @@ document.addEventListener('DOMContentLoaded', () => {
         'tutorial-7': false
     };
 
-    let userProgress = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
-    let savedOpenStates = JSON.parse(localStorage.getItem(OPEN_STATES_KEY)) || {};
+    let userProgress = {};
+    try {
+        const storedProgress = localStorage.getItem(STORAGE_KEY);
+        if (storedProgress) userProgress = JSON.parse(storedProgress);
+    } catch (e) {
+        console.error('Failed to load userProgress from localStorage:', e);
+    }
+
+    let savedOpenStates = {};
+    try {
+        const storedStates = localStorage.getItem(OPEN_STATES_KEY);
+        if (storedStates) savedOpenStates = JSON.parse(storedStates);
+    } catch (e) {
+        console.error('Failed to load savedOpenStates from localStorage:', e);
+    }
+
     let tutorialOpenStates = Object.assign({}, DEFAULT_OPEN_STATES, savedOpenStates);
 
     // --- Initialize ---
@@ -125,7 +139,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function saveOpenStates() {
-        localStorage.setItem(OPEN_STATES_KEY, JSON.stringify(tutorialOpenStates));
+        try {
+            localStorage.setItem(OPEN_STATES_KEY, JSON.stringify(tutorialOpenStates));
+        } catch (e) {
+            console.error('Failed to save tutorialOpenStates to localStorage:', e);
+        }
     }
 
     // --- Event Listeners Bindings ---
